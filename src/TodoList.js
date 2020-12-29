@@ -9,6 +9,7 @@ class TodoList extends Component {
     }; 
     this.create = this.create.bind(this); 
     this.remove = this.remove.bind(this); 
+    this.update = this.remove.bind (this); 
     }
 // create (newtoDo) this makes new State it takes the new todos
 // and then it adds the newTodo to the list.
@@ -26,17 +27,29 @@ create(newTodo){
 
 remove(id){
     this.setState({
-        todos: this.state.todos.filter(todo => this.id !== id)
+        todos: this.state.todos.filter(t => t.id !== id)
     })
 }
 //remove id takes a filter of the todos and removes the id that is being selected
 // doing this.id !== id means it will return a new array with 'not this id'. 
+update(id, updatedTask){
+    const updatedTodos = this.state.todos.map(todo => {
+        if (todo.id === id) {
+            return { ...todo, task: updatedTask}; 
+        }
+        return todo; 
+    })
+    this.setState({todos: updatedTodos});
+
+}
+
 render() {
         const todos = this.state.todos.map(todo => {
             return <Todo key ={todo.id} 
                          id = {todo.id} 
                          task = {todo.task} 
-                         removeTodo = {this.remove}/>
+                         removeTodo = {this.remove}
+                         updateTodo = {this.update}/>
         })
         return (
             <div>
