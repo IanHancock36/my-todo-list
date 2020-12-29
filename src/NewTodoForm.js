@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
 class NewTodoForm extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +19,10 @@ class NewTodoForm extends Component {
 // keep what you typed in the to do list input form.   
 handleSubmit(evt){
       evt.preventDefault();
-      this.props.createTodo(this.state)
+      this.props.createTodo({...this.state, id: uuidv4()});
       this.setState ({task: ''}); 
-
-    
-  }
+}
+//above the create todo you are taking the state and adding a random id with it.
 
   render() {
     return (
