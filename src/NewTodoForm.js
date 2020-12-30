@@ -19,7 +19,7 @@ class NewTodoForm extends Component {
 // keep what you typed in the to do list input form.   
 handleSubmit(evt){
       evt.preventDefault();
-      this.props.createTodo({...this.state, id: uuidv4()});
+      this.props.createTodo({...this.state, id: uuidv4(), completed : false});
       this.setState ({task: ''}); 
 }
 //above the create todo you are taking the state and adding a random id with it.
